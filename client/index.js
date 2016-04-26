@@ -39,14 +39,14 @@ var onSocketMsg = {
 		for(var i = 0; i < warnings.length; i++)
 			console.warn(stripAnsi(warnings[i]));
 		if(initial) return initial = false;
-		reloadApp();
+		//reloadApp();
 	},
 	errors: function(errors) {
 		console.log("[WDS] Errors while compiling.");
 		for(var i = 0; i < errors.length; i++)
 			console.error(stripAnsi(errors[i]));
 		if(initial) return initial = false;
-		reloadApp();
+		//reloadApp();
 	},
 	"proxy-error": function(errors) {
 		console.log("[WDS] Proxy error.");
