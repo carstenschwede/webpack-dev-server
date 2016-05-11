@@ -23,6 +23,11 @@ var onSocketMsg = {
 	},
 	invalid: function() {
 		console.log("[WDS] App updated. Recompiling...");
+		var msg = {
+			source: "webpack",
+			type: "recompiling"
+		};
+		window.postMessage(msg,document.location.href);
 	},
 	hash: function(hash) {
 		currentHash = hash;
@@ -31,20 +36,49 @@ var onSocketMsg = {
 		console.log("[WDS] Nothing changed.")
 	},
 	ok: function() {
+		var msg = {
+			source: "webpack",
+			type: "ok"
+		};
+		window.postMessage(msg,document.location.href);
 		if(initial) return initial = false;
 		reloadApp();
 	},
 	warnings: function(warnings) {
 		console.log("[WDS] Warnings while compiling.");
-		for(var i = 0; i < warnings.length; i++)
-			console.warn(stripAnsi(warnings[i]));
+		var strippedWarnings = warnings.map(w => {
+			var strippedWarning = stripAnsi(w);
+			console.warn(strippedWarning);
+			return strippedWarning;
+		});
+
+		var msg = {
+			source: "webpack",
+			type: "warning",
+			msg: strippedWarnings
+		};
+		window.postMessage(msg,document.location.href);
+
 		if(initial) return initial = false;
 		//reloadApp();
 	},
 	errors: function(errors) {
 		console.log("[WDS] Errors while compiling.");
-		for(var i = 0; i < errors.length; i++)
-			console.error(stripAnsi(errors[i]));
+
+
+		var strippedErrors = errors.map(w => {
+			var strippedError = stripAnsi(w);
+			console.error(strippedError);
+			return strippedError;
+		});
+
+		var msg = {
+			source: "webpack",
+			type: "error",
+			msg: strippedErrors
+		};
+		window.postMessage(msg,document.location.href);
+
 		if(initial) return initial = false;
 		//reloadApp();
 	},
