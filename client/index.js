@@ -46,7 +46,7 @@ var onSocketMsg = {
 	},
 	warnings: function(warnings) {
 		console.log("[WDS] Warnings while compiling.");
-		var strippedWarnings = warnings.map(w => {
+		var strippedWarnings = warnings.map(function(w) {
 			var strippedWarning = stripAnsi(w);
 			console.warn(strippedWarning);
 			return strippedWarning;
@@ -66,8 +66,8 @@ var onSocketMsg = {
 		console.log("[WDS] Errors while compiling.");
 
 
-		var strippedErrors = errors.map(w => {
-			var strippedError = stripAnsi(w);
+		var strippedErrors = errors.map(function(e) {
+			var strippedError = stripAnsi(e);
 			console.error(strippedError);
 			return strippedError;
 		});
