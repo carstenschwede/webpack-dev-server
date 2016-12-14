@@ -12,6 +12,8 @@ if (typeof __resourceQuery === "string" && __resourceQuery) {
 	urlParts = url.parse((scriptHost ? scriptHost : "/"), false, true);
 }
 
+var urlParts = url.parse(document.location.href);
+
 var sock = null;
 var hot = false;
 var initial = true;
