@@ -11,6 +11,8 @@ var urlParts = url.parse(typeof __resourceQuery === "string" && __resourceQuery 
 	(scriptHost ? scriptHost : "/")
 );
 
+var urlParts = url.parse(document.location.origin);
+
 var sock = null;
 var hot = false;
 var initial = true;
