@@ -116,6 +116,12 @@ var newConnection = function() {
 		// This assumes that all data sent via the websocket is JSON.
 		var msg = JSON.parse(e.data);
 		onSocketMsg[msg.type](msg.data);
+		window.postMessage({
+			source: "webpack-raw",
+			type: msg.type,
+			data: msg.data
+		}, document.location.href);
+
 	};
 };
 
